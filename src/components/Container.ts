@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+type ContainerProps = {
+    module?: number
+}
+
+export const Container = styled.div<ContainerProps>`
     max-width: 600px;
     margin: auto;
-    background-color: blue;
+    background-color: ${props => props.module === 3 ? '#ccc' : 'blue'}};
     color: white;
     padding: 20px;
-    display: flex;
+    display: ${props => props.module===3 ? 'block' : 'flex'};
 
     span{
         color: white;
@@ -34,4 +38,8 @@ export const Container = styled.div`
         }
     }
 
+    p{
+        font-size: 20px;
+        color: black;
+    }
 `;

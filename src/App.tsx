@@ -9,11 +9,11 @@ function App(){
 const App = () => {
   return React.createElement('div', null, "Isto foi feito com jsx");
 }*/
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Botao } from './components/Botao';
 import { Pessoa } from './components/Pessoa';
 import { Container } from './components/Container';
-import { BotaoStyle } from './AppStyles';
+import { BotaoStyle, Input } from './AppStyles';
 
 const App = () => {
 
@@ -27,6 +27,15 @@ const App = () => {
   ];
   let [showPeople, setShowPeople] = useState(false);
   let [modulo2, setModulo2] = useState(false);
+  let [modulo3, setModulo3] = useState(false);
+  let [firstName, setFirstName] = useState("");
+  let [lastName, setLastName] = useState("");
+  let [fullName, setFullName] = useState("");
+
+  useEffect(() => {
+    setFullName(firstName + " " + lastName);
+  }, [firstName, lastName]);
+
 
   const buttonEventAction = (message: string) => {
     alert('You cliked me at App: ' + message);
@@ -38,6 +47,18 @@ const App = () => {
 
   const handleModulo2 = () => {
     setModulo2(!modulo2);
+  }
+
+  const handleModulo3 = () => {
+    setModulo3(!modulo3);
+  }
+
+  const handleFirstName = (e: ChangeEvent<HTMLInputElement>) => {
+    setFirstName(e.target.value);
+  }
+
+  const handleLastName = (e: ChangeEvent<HTMLInputElement>) => {
+    setLastName(e.target.value);
   }
 
   return (
@@ -67,7 +88,17 @@ const App = () => {
           <a href="" className="link">Link aqui</a>
         </Container>
       }
+      {/*modulo 3 --------------------------------------------------------------------------------------------------*/
+        modulo3 &&
+        <Container module={3}>
+          <Input type="text" placeholder='Type your first name' onChange={handleFirstName}/>
+          <Input type="text" placeholder='Type last name' onChange={handleLastName}/>
+          <p>Full name: {fullName}</p>
+        </Container>
+      }
+
       <button onClick={handleModulo2}>Modulo 2</button>
+      <button onClick={handleModulo3}>Modulo 3</button>
     </div>
   );
 }

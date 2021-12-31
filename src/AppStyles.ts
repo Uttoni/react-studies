@@ -9,3 +9,7 @@ export const BotaoStyle = styled.button<BotaoProps>`
     font-size: ${props => props.small === true ? '15px' : '32px'};
     backgrond-color: ${props => props.bg};
 `;
+
+export const Input = styled.input`
+    font-size: 20px;
+`;
